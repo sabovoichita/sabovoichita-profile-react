@@ -15,7 +15,7 @@ function getValues() {
   return language;
 }
 
-export const LanguagesTable = ({ languages, border, onSubmit }) => (
+export const LanguagesTable = ({ languages, border, onSubmit, onDelete }) => (
   <form
     id="languagesForm"
     onSubmit={(e) => {
@@ -39,7 +39,13 @@ export const LanguagesTable = ({ languages, border, onSubmit }) => (
             <td className="favorite">{language.name}</td>
             <td>{language.level}</td>
             <td>
-              <a href="#" className="delete-row">
+              <a
+                href="#"
+                className="delete-row"
+                onClick={(e) => {
+                  onDelete(language.id);
+                }}
+              >
                 &#10006;
               </a>
               <a href="#" className="edit-row">

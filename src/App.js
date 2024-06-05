@@ -70,6 +70,7 @@ class App extends Component {
       .then((r) => {
         console.warn(r);
         if (r.success) {
+          this.loadLanguages();
           language.id = r.id;
           // this.state.languages.push(language);
           const languages = this.state.languages.concat(language);
@@ -80,6 +81,21 @@ class App extends Component {
         }
       });
   }
+
+  remove(id) {
+    fetch("http://localhost:3030/languages-json/delete", {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ id }),
+    })
+      .then((r) => r.json())
+      .then(() => {
+        this.loadLanguages();
+      });
+  }
+
   render() {
     // console.debug("show:", this.state.languages);
     return (
@@ -92,6 +108,9 @@ class App extends Component {
           onSubmit={(language) => {
             // console.warn("language:", language);
             this.addLanguages(language);
+          }}
+          onDelete={(id) => {
+            this.remove(id);
           }}
         />
         <div>{this.state.date}</div>
