@@ -14,7 +14,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    console.warn("mount here");
+    // console.warn("mount here");
 
     setInterval(() => {
       this.setState({
@@ -22,33 +22,43 @@ class App extends Component {
       });
     }, 60000);
 
-    setTimeout(() => {
-      console.warn("loaded");
-      this.setState({
-        languages: [
-          {
-            name: "Romanian",
-            level: "Native",
-          },
-          {
-            name: "English",
-            level: "Profesional",
-          },
-          {
-            name: "Spanish",
-            level: "Beginner",
-          },
-          {
-            name: "French",
-            level: "Beginner",
-          },
-        ],
+    // setTimeout(() => {
+    //   console.warn("loaded");
+    //   this.setState({
+    //     languages: [
+    //       {
+    //         name: "Romanian",
+    //         level: "Native",
+    //       },
+    //       {
+    //         name: "English",
+    //         level: "Profesional",
+    //       },
+    //       {
+    //         name: "Spanish",
+    //         level: "Beginner",
+    //       },
+    //     ],
+    //   });
+    // }, 2000);
+
+    this.loadLanguages();
+  }
+
+  loadLanguages() {
+    fetch("http://localhost:3030/languages-json")
+      .then((response) => response.json())
+      .then((languages) => {
+        // console.log("languages1:", languages);
+        this.setState({
+          languages,
+        });
+        // printJsonIntoTable(languages, "languages-table");
       });
-    }, 2000);
   }
 
   render() {
-    console.debug("show:", this.state.languages);
+    // console.debug("show:", this.state.languages);
     return (
       <div id="header-info">
         <h1>Voichita Maria</h1>
