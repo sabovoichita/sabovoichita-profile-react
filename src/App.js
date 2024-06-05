@@ -56,14 +56,37 @@ class App extends Component {
         // printJsonIntoTable(languages, "languages-table");
       });
   }
-
+  addLanguages(language) {
+    console.warn("language:", language);
+    fetch("http://localhost:3030/languages-json/create", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(language),
+    })
+      .then((res) => res.json())
+      .then((r) => {
+        console.warn(r);
+        if (r.success) {
+          this.loadLanguages();
+        }
+      });
+  }
   render() {
     // console.debug("show:", this.state.languages);
     return (
       <div id="header-info">
         <h1>Voichita Maria</h1>
         <p id="job-title">Transport Manager</p>
-        <LanguagesTable languages={this.state.languages} border={1} />
+        <LanguagesTable
+          languages={this.state.languages}
+          border={1}
+          onSubmit={(language) => {
+            // console.warn("language:", language);
+            this.addLanguages(language);
+          }}
+        />
         <div>{this.state.date}</div>
       </div>
     );
