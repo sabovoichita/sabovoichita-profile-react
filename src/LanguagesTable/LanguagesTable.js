@@ -1,5 +1,11 @@
-export const LanguagesTable = (props) => (
-  <table border={props.border}>
+// function x(props) {
+//   const team = props.teams;
+//   const border = props.border;
+//   const { teams, border } = props;
+// }
+
+export const LanguagesTable = ({ languages, border }) => (
+  <table border={border}>
     <thead>
       <tr>
         <th>Language</th>
@@ -8,7 +14,7 @@ export const LanguagesTable = (props) => (
       </tr>
     </thead>
     <tbody>
-      {props.languages.map((language, index) => (
+      {languages.map((language, index) => (
         <tr key={index}>
           <td className="favorite">{language.name}</td>
           <td>{language.level}</td>
