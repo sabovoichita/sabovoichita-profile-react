@@ -17,6 +17,7 @@ function getValues() {
 
 export const LanguagesTable = ({ languages, border, onSubmit }) => (
   <form
+    id="languagesForm"
     onSubmit={(e) => {
       e.preventDefault();
       const values = getValues();

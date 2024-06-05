@@ -58,6 +58,7 @@ class App extends Component {
   }
   addLanguages(language) {
     console.warn("language:", language);
+    document.getElementById("languagesForm").reset();
     fetch("http://localhost:3030/languages-json/create", {
       method: "POST",
       headers: {
@@ -69,7 +70,13 @@ class App extends Component {
       .then((r) => {
         console.warn(r);
         if (r.success) {
-          this.loadLanguages();
+          language.id = r.id;
+          // this.state.languages.push(language);
+          const languages = this.state.languages.concat(language);
+          this.setState({
+            languages,
+          });
+          // this.loadLanguages();
         }
       });
   }
