@@ -9,11 +9,19 @@ class App extends Component {
     super(props);
     this.state = {
       languages: [],
+      date: new Date().toTimeString(),
     };
   }
 
   componentDidMount() {
     console.warn("mount here");
+
+    setInterval(() => {
+      this.setState({
+        date: new Date().toTimeString(),
+      });
+    }, 60000);
+
     setTimeout(() => {
       console.warn("loaded");
       this.setState({
@@ -46,6 +54,7 @@ class App extends Component {
         <h1>Voichita Maria</h1>
         <p id="job-title">Transport Manager</p>
         <LanguagesTable languages={this.state.languages} border={1} />
+        <div>{this.state.date}</div>
       </div>
     );
   }
