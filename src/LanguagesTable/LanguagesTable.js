@@ -1,5 +1,5 @@
 export const LanguagesTable = (props) => (
-  <table border={1}>
+  <table border={props.border}>
     <thead>
       <tr>
         <th>Language</th>

@@ -28,7 +28,7 @@ function App() {
         <h1>Voichita Maria</h1>
         <p id="job-title">Transport Manager</p>
         <div>
-          <LanguagesTable languages={languages} />
+          <LanguagesTable languages={languages} border={1} />
         </div>
       </div>
     </>
