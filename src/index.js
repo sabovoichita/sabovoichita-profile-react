@@ -9,14 +9,21 @@ import { Provider } from "react-redux";
 const rootReducer = (state = { languages: [] }, action) => {
   console.warn("rootReducer", state, action);
   switch (action.type) {
-    case "LANGUAGES_LOADED": {
+    case "LANGUAGE_LOADED": {
       return {
         languages: action.languages,
       };
     }
-    case "LANGUAGES_ADDED": {
+    case "LANGUAGE_ADDED": {
       return {
         languages: state.languages.concat(action.language),
+      };
+    }
+    case "LANGUAGE_REMOVED": {
+      return {
+        languages: state.languages.filter(
+          (language) => language.id != action.id
+        ),
       };
     }
     default:
@@ -35,7 +42,7 @@ function loadLanguages() {
   fetch("http://localhost:3030/languages-json")
     .then((response) => response.json())
     .then((languages) => {
-      store.dispatch({ type: "LANGUAGES_LOADED", languages: languages });
+      store.dispatch({ type: "LANGUAGE_LOADED", languages });
     });
 }
 

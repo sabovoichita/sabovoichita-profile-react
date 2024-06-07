@@ -24,6 +24,7 @@ class App extends Component {
   }
 
   loadLanguages() {}
+
   addLanguages(language) {
     console.warn("language:", language);
     document.getElementById("languagesForm").reset();
@@ -39,12 +40,7 @@ class App extends Component {
         console.warn(r);
         if (r.success) {
           language.id = r.id;
-          // console.warn("before add", this.props);
           this.props.onAdd(language);
-          // this.props.dispatch({
-          //   type: "LANGUAGE_ADDED",
-          //   language,
-          // });
         }
       });
   }
@@ -59,7 +55,7 @@ class App extends Component {
     })
       .then((r) => r.json())
       .then(() => {
-        this.loadLanguages();
+        this.props.onDelete(id);
       });
   }
 
@@ -94,6 +90,7 @@ const mapDispatchToProps = (dispatch) => ({
     console.warn("on add language", language);
     dispatch({ type: "LANGUAGE_ADDED", language });
   },
+  onDelete: (id) => dispatch({ type: "LANGUAGE_REMOVED", id }),
 });
 
 const AppContainer = connect(mapStateToProps, mapDispatchToProps)(App);
