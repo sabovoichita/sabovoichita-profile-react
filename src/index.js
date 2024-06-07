@@ -14,6 +14,11 @@ const rootReducer = (state = { languages: [] }, action) => {
         languages: action.languages,
       };
     }
+    case "LANGUAGES_ADDED": {
+      return {
+        languages: state.languages.concat(action.language),
+      };
+    }
     default:
       return state;
   }

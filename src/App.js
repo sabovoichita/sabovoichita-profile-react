@@ -10,7 +10,7 @@ class App extends Component {
       languages: [],
       date: new Date().toTimeString(),
     };
-    console.warn("props", props);
+    console.warn("props contains:", props);
   }
 
   componentDidMount() {
@@ -38,13 +38,19 @@ class App extends Component {
       .then((r) => {
         console.warn(r);
         if (r.success) {
-          this.loadLanguages();
+          // this.loadLanguages();
+          // console.warn("props here %o", this.props);
+
           language.id = r.id;
-          // this.state.languages.push(language);
-          const languages = this.state.languages.concat(language);
-          this.setState({
-            languages,
+          this.props.dispatch({
+            type: "LANGUAGE_ADDED",
+            language,
           });
+          // this.state.languages.push(language);
+          // const languages = this.state.languages.concat(language);
+          // this.setState({
+          //   languages,
+          // });
           // this.loadLanguages();
         }
       });
@@ -86,13 +92,9 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  console.info("map state to props: ", state);
-  return {
-    languages: state.languages,
-  };
-};
-
+const mapStateToProps = (state) => ({
+  languages: state.languages,
+});
 const AppContainer = connect(mapStateToProps)(App);
 
 export default AppContainer;
