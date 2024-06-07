@@ -38,20 +38,13 @@ class App extends Component {
       .then((r) => {
         console.warn(r);
         if (r.success) {
-          // this.loadLanguages();
-          // console.warn("props here %o", this.props);
-
           language.id = r.id;
-          this.props.dispatch({
-            type: "LANGUAGE_ADDED",
-            language,
-          });
-          // this.state.languages.push(language);
-          // const languages = this.state.languages.concat(language);
-          // this.setState({
-          //   languages,
+          // console.warn("before add", this.props);
+          this.props.onAdd(language);
+          // this.props.dispatch({
+          //   type: "LANGUAGE_ADDED",
+          //   language,
           // });
-          // this.loadLanguages();
         }
       });
   }
@@ -95,6 +88,14 @@ class App extends Component {
 const mapStateToProps = (state) => ({
   languages: state.languages,
 });
-const AppContainer = connect(mapStateToProps)(App);
+
+const mapDispatchToProps = (dispatch) => ({
+  onAdd: (language) => {
+    console.warn("on add language", language);
+    dispatch({ type: "LANGUAGE_ADDED", language });
+  },
+});
+
+const AppContainer = connect(mapStateToProps, mapDispatchToProps)(App);
 
 export default AppContainer;
