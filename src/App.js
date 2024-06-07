@@ -7,7 +7,6 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      languages: [],
       date: new Date().toTimeString(),
     };
     console.warn("props contains:", props);
@@ -86,10 +85,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onAdd: (language) => {
-    console.warn("on add language", language);
-    dispatch({ type: "LANGUAGE_ADDED", language });
-  },
+  onAdd: (language) => dispatch({ type: "LANGUAGE_ADDED", language }),
   onDelete: (id) => dispatch({ type: "LANGUAGE_REMOVED", id }),
 });
 

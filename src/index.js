@@ -6,21 +6,25 @@ import reportWebVitals from "./reportWebVitals";
 import { legacy_createStore as createStore } from "redux";
 import { Provider } from "react-redux";
 
-const rootReducer = (state = { languages: [] }, action) => {
+const rootReducer = (state = { filter: "", languages: [] }, action) => {
   console.warn("rootReducer", state, action);
   switch (action.type) {
     case "LANGUAGE_LOADED": {
       return {
+        ...state,
         languages: action.languages,
       };
     }
     case "LANGUAGE_ADDED": {
       return {
-        languages: state.languages.concat(action.language),
+        // languages: state.languages.concat(action.language),
+        ...state,
+        languages: [...state.languages, action.language],
       };
     }
     case "LANGUAGE_REMOVED": {
       return {
+        ...state,
         languages: state.languages.filter(
           (language) => language.id != action.id
         ),
