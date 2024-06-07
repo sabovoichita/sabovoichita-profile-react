@@ -1,8 +1,7 @@
-// import React from "react";
-// import logo from "./logo.svg";
 import { Component } from "react";
 import "./App.css";
 import { LanguagesTable } from "./LanguagesTable/LanguagesTable";
+import { connect } from "react-redux";
 
 class App extends Component {
   constructor(props) {
@@ -11,51 +10,20 @@ class App extends Component {
       languages: [],
       date: new Date().toTimeString(),
     };
+    console.warn("props", props);
   }
 
   componentDidMount() {
-    // console.warn("mount here");
-
     setInterval(() => {
       this.setState({
         date: new Date().toTimeString(),
       });
     }, 60000);
 
-    // setTimeout(() => {
-    //   console.warn("loaded");
-    //   this.setState({
-    //     languages: [
-    //       {
-    //         name: "Romanian",
-    //         level: "Native",
-    //       },
-    //       {
-    //         name: "English",
-    //         level: "Profesional",
-    //       },
-    //       {
-    //         name: "Spanish",
-    //         level: "Beginner",
-    //       },
-    //     ],
-    //   });
-    // }, 2000);
-
     this.loadLanguages();
   }
 
-  loadLanguages() {
-    fetch("http://localhost:3030/languages-json")
-      .then((response) => response.json())
-      .then((languages) => {
-        // console.log("languages1:", languages);
-        this.setState({
-          languages,
-        });
-        // printJsonIntoTable(languages, "languages-table");
-      });
-  }
+  loadLanguages() {}
   addLanguages(language) {
     console.warn("language:", language);
     document.getElementById("languagesForm").reset();
@@ -97,13 +65,12 @@ class App extends Component {
   }
 
   render() {
-    // console.debug("show:", this.state.languages);
     return (
       <div id="header-info">
         <h1>Voichita Maria</h1>
         <p id="job-title">Transport Manager</p>
         <LanguagesTable
-          languages={this.state.languages}
+          languages={this.props.languages}
           border={1}
           onSubmit={(language) => {
             // console.warn("language:", language);
@@ -119,4 +86,13 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  console.info("map state to props: ", state);
+  return {
+    languages: state.languages,
+  };
+};
+
+const AppContainer = connect(mapStateToProps)(App);
+
+export default AppContainer;
