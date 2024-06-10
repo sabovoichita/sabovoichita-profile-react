@@ -26,35 +26,7 @@ class App extends Component {
   addLanguages(language) {
     console.warn("language:", language);
     document.getElementById("languagesForm").reset();
-    fetch("http://localhost:3030/languages-json/create", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(language),
-    })
-      .then((res) => res.json())
-      .then((r) => {
-        console.warn(r);
-        if (r.success) {
-          language.id = r.id;
-          this.props.onAdd(language);
-        }
-      });
-  }
-
-  remove(id) {
-    fetch("http://localhost:3030/languages-json/delete", {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ id }),
-    })
-      .then((r) => r.json())
-      .then(() => {
-        this.props.onDelete(id);
-      });
+    this.props.onAdd(language);
   }
 
   render() {
@@ -77,7 +49,7 @@ class App extends Component {
             this.addLanguages(language);
           }}
           onDelete={(id) => {
-            this.remove(id);
+            this.props.onDelete(id);
           }}
         />
         <div>{this.state.date}</div>
@@ -93,8 +65,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   onLoadLanguages: (id) => dispatch({ type: "LANGUAGE_LOAD", id }),
-  onAdd: (language) => dispatch({ type: "LANGUAGE_ADDED", language }),
-  onDelete: (id) => dispatch({ type: "LANGUAGE_REMOVED", id }),
+  onAdd: (language) => dispatch({ type: "LANGUAGE_ADD", language }),
+  onDelete: (id) => dispatch({ type: "LANGUAGE_REMOVE", id }),
 });
 
 const AppContainer = connect(mapStateToProps, mapDispatchToProps)(App);

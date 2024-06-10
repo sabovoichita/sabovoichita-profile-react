@@ -21,7 +21,7 @@ const languages = (state = [], action) => {
       return [...state, action.language];
     }
     case "LANGUAGE_REMOVED": {
-      return state.filter((language) => language.id != action.id);
+      return state.filter((language) => language.id !== action.id);
     }
     default:
       return state;
@@ -59,6 +59,7 @@ const rootReducer = combineReducers({
   count,
   filter,
 });
+
 //used for async actions
 const languagesMdl = (store) => (next) => (action) => {
   console.info("middleware", action, store.getState());
@@ -69,6 +70,41 @@ const languagesMdl = (store) => (next) => (action) => {
         .then((languages) => {
           store.dispatch({ type: "LANGUAGE_LOADED", languages });
         });
+      break;
+    }
+    case "LANGUAGE_ADD": {
+      const language = action.language;
+      fetch("http://localhost:3030/languages-json/create", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(language),
+      })
+        .then((res) => res.json())
+        .then((r) => {
+          console.warn(r);
+          if (r.success) {
+            language.id = r.id;
+            store.dispatch({ type: "LANGUAGE_ADDED", language });
+          }
+        });
+      break;
+    }
+
+    case "LANGUAGE_REMOVE": {
+      fetch("http://localhost:3030/languages-json/delete", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ id: action.id }),
+      })
+        .then((r) => r.json())
+        .then(() => {
+          store.dispatch({ type: "LANGUAGE_REMOVED", id: action.id });
+        });
+      break;
     }
   }
   return next(action);
