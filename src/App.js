@@ -20,10 +20,8 @@ class App extends Component {
       });
     }, 60000);
 
-    this.loadLanguages();
+    this.props.onLoadLanguages();
   }
-
-  loadLanguages() {}
 
   addLanguages(language) {
     console.warn("language:", language);
@@ -94,6 +92,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
+  onLoadLanguages: (id) => dispatch({ type: "LANGUAGE_LOAD", id }),
   onAdd: (language) => dispatch({ type: "LANGUAGE_ADDED", language }),
   onDelete: (id) => dispatch({ type: "LANGUAGE_REMOVED", id }),
 });

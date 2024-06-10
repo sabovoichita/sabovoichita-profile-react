@@ -3,8 +3,13 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { combineReducers, legacy_createStore as createStore } from "redux";
+import {
+  applyMiddleware,
+  combineReducers,
+  legacy_createStore as createStore,
+} from "redux";
 import { Provider } from "react-redux";
+// import { type } from "os";
 
 const languages = (state = [], action) => {
   console.warn("rootReducer", state, action);
@@ -54,23 +59,27 @@ const rootReducer = combineReducers({
   count,
   filter,
 });
+//used for async actions
+const languagesMdl = (store) => (next) => (action) => {
+  console.info("middleware", action, store.getState());
+  switch (action.type) {
+    case "LANGUAGE_LOAD": {
+      fetch("http://localhost:3030/languages-json")
+        .then((res) => res.json())
+        .then((languages) => {
+          store.dispatch({ type: "LANGUAGE_LOADED", languages });
+        });
+    }
+  }
+  return next(action);
+};
 
-const store = createStore(rootReducer);
+const store = createStore(rootReducer, applyMiddleware(languagesMdl));
 console.warn("store", store);
 
 store.subscribe(() => {
   console.warn("data changed", store.getState());
 });
-
-function loadLanguages() {
-  fetch("http://localhost:3030/languages-json")
-    .then((response) => response.json())
-    .then((languages) => {
-      store.dispatch({ type: "LANGUAGE_LOADED", languages });
-    });
-}
-
-loadLanguages();
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
