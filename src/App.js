@@ -10,7 +10,7 @@ class App extends Component {
     this.state = {
       date: new Date().toTimeString(),
     };
-    console.warn("props contains:", props);
+    // console.warn("props contains:", props);
   }
 
   componentDidMount() {
@@ -24,7 +24,7 @@ class App extends Component {
   }
 
   addLanguages(language) {
-    console.warn("language:", language);
+    // console.warn("language:", language);
     document.getElementById("languagesForm").reset();
     this.props.onAdd(language);
   }

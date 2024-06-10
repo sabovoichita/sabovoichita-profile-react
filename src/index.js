@@ -12,7 +12,7 @@ import { Provider } from "react-redux";
 // import { type } from "os";
 
 const languages = (state = [], action) => {
-  console.warn("rootReducer", state, action);
+  // console.warn("rootReducer", state, action);
   switch (action.type) {
     case "LANGUAGE_LOADED": {
       return action.languages;
@@ -62,7 +62,7 @@ const rootReducer = combineReducers({
 
 //used for async actions
 const languagesMdl = (store) => (next) => (action) => {
-  console.info("middleware", action, store.getState());
+  // console.info("middleware", action, store.getState());
   switch (action.type) {
     case "LANGUAGE_LOAD": {
       fetch("http://localhost:3030/languages-json")
@@ -83,7 +83,7 @@ const languagesMdl = (store) => (next) => (action) => {
       })
         .then((res) => res.json())
         .then((r) => {
-          console.warn(r);
+          // console.warn(r);
           if (r.success) {
             language.id = r.id;
             store.dispatch({ type: "LANGUAGE_ADDED", language });
@@ -111,11 +111,11 @@ const languagesMdl = (store) => (next) => (action) => {
 };
 
 const store = createStore(rootReducer, applyMiddleware(languagesMdl));
-console.warn("store", store);
+// console.warn("store", store);
 
-store.subscribe(() => {
-  console.warn("data changed", store.getState());
-});
+// store.subscribe(() => {
+//   console.warn("data changed", store.getState());
+// });
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
