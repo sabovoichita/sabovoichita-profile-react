@@ -41,17 +41,20 @@ class App extends Component {
         <div>
           <FilterContainer />
         </div>
-        <LanguagesTable
-          languages={languages}
-          border={1}
-          onSubmit={(language) => {
-            // console.warn("language:", language);
-            this.addLanguages(language);
-          }}
-          onDelete={(id) => {
-            this.props.onDelete(id);
-          }}
-        />
+        <div id="languages">
+          <LanguagesTable
+            languages={languages}
+            border={1}
+            onSubmit={(language) => {
+              // console.warn("language:", language);
+              this.addLanguages(language);
+            }}
+            onDelete={(id) => {
+              this.props.onDelete(id);
+            }}
+          />
+        </div>
+
         <div>{this.state.date}</div>
       </div>
     );
