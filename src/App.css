@@ -36,3 +36,362 @@
     transform: rotate(360deg);
   }
 }
+
+/* --------------------------- Main Section ------------------------------  */
+
+:root {
+  --clr-blue: #240be8;
+  --clr-yellow: #ffff00;
+  --clr-white: #fff;
+  --clr-whiteish: #e1e1e1;
+
+  --clr-dark: #727272;
+  --clr-light: #f3f3f3;
+  --clr-sec-dark: #000000;
+  --clr-sec-light: #ffff;
+}
+
+.dark-mode {
+  --clr-light: #727272;
+  --clr-dark: #f3f3f3;
+  --clr-sec-light: rgb(124, 124, 124);
+  --clr-sec-dark: #fffff;
+}
+
+/* ////////////////////////     TOGGLE BTN END     /////////////////////////// */
+
+body {
+  transition: all 0.3s ease-in-out;
+}
+
+body.dark {
+  background-color: #000000;
+}
+/* /* ////////////////////////     TOGGLE BTN START     /////// */
+
+html {
+  height: 100%;
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+body {
+  margin: 0;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--clr-whiteish);
+}
+
+#content {
+  flex: 4;
+  display: flex;
+  flex-direction: row;
+}
+
+#main {
+  flex: 4;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---------------------------Side Section------------------------------  */
+#side-menu {
+  flex: 1;
+  padding: 10px 4px 10px 4px;
+}
+
+#side-menu > section {
+  margin-bottom: 10px;
+  padding: 5px;
+  background-color: var(--clr-white);
+  border-radius: 4px;
+  box-shadow: 0 0 0 1px rgb(0, 0, 0, 0.15), 0 2px 3px rgba(0, 0, 0, 0.2);
+  animation: mymove 4s infinite;
+}
+
+#side-menu > section h2 {
+  margin: 0 0 10px 0;
+}
+#side-menu button {
+  display: inline-block;
+  align-items: right;
+  margin: 5px;
+  border-radius: 4px;
+  border-color: var(--clr-blue);
+  color: var(--clr-blue);
+}
+#rubik {
+  margin-top: 30px;
+}
+label {
+  color: var(--clr-blue);
+}
+
+input {
+  color: var(--clr-blue);
+  background-color: var(--clr-white);
+  border: 2px solid var(--clr-blue);
+  border-radius: 5px;
+}
+/* --------------------------- Side Section- Rubik Section ------------------------------  */
+
+/* in the file rubik.css */
+
+/* --------------------------- Header Section ------------------------------  */
+header {
+  position: sticky;
+  top: 0;
+}
+#header-wrapper {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  align-items: center;
+  min-height: 120px;
+  background: linear-gradient(-30deg, var(--clr-blue), transparent);
+}
+
+#header-wrapper #header-info {
+  padding: 10px;
+}
+
+#header-info {
+  padding: 10px;
+}
+
+#header-picture img {
+  border-radius: 50%;
+  border: 4px solid rgba(138, 135, 135, 0.413);
+  transition: 0.5s;
+}
+
+#header-picture img:hover {
+  border-radius: 500% 50px 500% 5px;
+  border-color: rgb(169, 169, 238);
+}
+
+h1 {
+  color: var(--clr-sec-dark);
+  font-size: 35px;
+  font-weight: 900;
+  letter-spacing: 0.5vw;
+}
+#job-title {
+  color: var(--clr-sec-dark);
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: 0.5vw;
+}
+.toggle-container {
+  flex: 1;
+}
+.toggle-container div {
+  float: right;
+  padding-right: 20px;
+}
+#toogle-button {
+  border-style: hidden;
+  background-color: var(--clr-light);
+  border-radius: 3px;
+  padding: 2px;
+}
+
+.grayscale {
+  filter: grayscale(1);
+  -webkit-filter: grayscale(1);
+}
+
+/* --------------------------- Top Menu Bar Section ------------------------------  */
+
+#top-menu-bar {
+  text-align: center;
+  background-color: var(--clr-blue);
+  color: var(--clr-white);
+  margin: 0;
+  padding: 2px;
+}
+
+#top-menu-bar li {
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+}
+
+#top-menu-bar a {
+  display: inline-block;
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: 600;
+  position: relative;
+  color: var(--clr-white);
+  padding: 5px 10px;
+  border-radius: 4px;
+  transition: 0.5s;
+}
+
+#top-menu-bar a:visited {
+  color: var(--clr-white);
+}
+
+#top-menu-bar a.active {
+  color: var(--clr-blue);
+  background: var(--clr-white);
+}
+#top-menu-bar a:hover {
+  font-size: 25px;
+  background-color: var(--clr-yellow);
+  color: var(--clr-sec-dark);
+  border-bottom: 2px solid var(--clr-blue);
+  border-right: 2px solid var(--clr-blue);
+}
+
+.page {
+  display: none;
+  flex: 1;
+  background-color: var(--clr-white);
+  margin: 10px;
+  padding: 24px;
+  border-radius: 4px;
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.15), 0 2px 3px rgba(0, 0, 0, 0.2);
+  animation: mymove 4s infinite;
+}
+
+.page h2 {
+  margin: 0 0 10px 0;
+}
+@keyframes mymove {
+  50% {
+    box-shadow: 5px 5px 10px var(--clr-blue);
+  }
+}
+
+/* --------------------------- Languages Section ------------------------------  */
+
+table,
+td,
+th {
+  border: 2px solid var(--clr-white);
+  text-align: left;
+  border-collapse: collapse;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+table:nth-of-type(tr) {
+  background-color: #727272;
+}
+th {
+  padding: 10px;
+  font-size: larger;
+}
+
+td {
+  padding: 8px;
+  border-bottom-color: var(--clr-blue);
+}
+
+.favorite {
+  font-weight: normal;
+}
+
+td.favorite {
+  font-weight: normal;
+}
+
+/* --------------------------- Color Design Section ------------------------------  */
+
+h2 {
+  color: var(--clr-blue);
+}
+
+hr {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.15), 0 2px 3px rgba(0, 0, 0, 0.2);
+}
+/* h2:hover {
+  color: black;
+  background-color: #fcd966;
+  text-decoration: underline;
+  transition: all 0.3s;
+} */
+span:hover {
+  color: var(--clr-blue);
+  background-color: var(--clr-yellow);
+  transition: all 0.4s;
+  border-radius: 4px;
+  padding: 5px;
+  transition: all 0.3s;
+}
+
+a {
+  color: var(--clr-blue);
+  text-decoration: none;
+}
+
+p {
+  padding: 2px;
+  font-size: 18px;
+}
+li {
+  padding: 10px;
+  font-size: 18px;
+}
+
+/* --------------------------- Footer Section ------------------------------  */
+
+footer {
+  background-color: var(--clr-blue);
+  color: var(--clr-white);
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: center;
+  position: sticky;
+  bottom: 0;
+  gap: 10px;
+}
+footer img {
+  padding-top: 10px;
+}
+
+/* footer a { */
+/* color: var(--clr-blue); */
+/* background-color: var(--clr-white); */
+/* font-weight: 300; */
+/* padding: 2px 5px; */
+/* border-radius: 2px; */
+/* } */
+
+/* footer a:hover { */
+/* text-decoration: none; */
+/* background-color: var(--clr-yellow); */
+/* color: var(--clr-blue); */
+/* font-size: 20px; */
+/* transition: 0.4s; */
+/* } */
+
+#skills li span {
+  color: grey;
+}
+.favorite {
+  color: blue;
+}
+/* --------------------------- Media Section ------------------------------  */
+@media (max-width: 600px) {
+  body {
+    font-size: 1em;
+    min-width: 600px;
+  }
+  #content {
+    flex-direction: column-reverse;
+    min-width: 600px;
+  }
+  #top-menu-bar a {
+    padding: 5px 10px 5px 10px;
+  }
+  header {
+    min-width: 600px;
+  }
+  footer {
+    min-width: 600px;
+  }
+}
