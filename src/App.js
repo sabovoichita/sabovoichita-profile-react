@@ -2,6 +2,7 @@ import { Component } from "react";
 import "./App.css";
 import { LanguagesTable } from "./LanguagesTable/LanguagesTable";
 import { connect } from "react-redux";
+import { FilterContainer } from "./filter";
 
 class App extends Component {
   constructor(props) {
@@ -59,12 +60,19 @@ class App extends Component {
   }
 
   render() {
+    const f = this.props.filter;
+    const languages = this.props.languages.filter(
+      (language) => language.name.toLowerCase().indexOf(f) > -1
+    );
     return (
       <div id="header-info">
         <h1>Voichita Maria</h1>
         <p id="job-title">Transport Manager</p>
+        <div>
+          <FilterContainer />
+        </div>
         <LanguagesTable
-          languages={this.props.languages}
+          languages={languages}
           border={1}
           onSubmit={(language) => {
             // console.warn("language:", language);
@@ -82,6 +90,7 @@ class App extends Component {
 
 const mapStateToProps = (state) => ({
   languages: state.languages,
+  filter: state.filter,
 });
 
 const mapDispatchToProps = (dispatch) => ({

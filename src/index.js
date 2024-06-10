@@ -3,37 +3,57 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { legacy_createStore as createStore } from "redux";
+import { combineReducers, legacy_createStore as createStore } from "redux";
 import { Provider } from "react-redux";
 
-const rootReducer = (state = { filter: "", languages: [] }, action) => {
+const languages = (state = [], action) => {
   console.warn("rootReducer", state, action);
   switch (action.type) {
     case "LANGUAGE_LOADED": {
-      return {
-        ...state,
-        languages: action.languages,
-      };
+      return action.languages;
     }
     case "LANGUAGE_ADDED": {
-      return {
-        // languages: state.languages.concat(action.language),
-        ...state,
-        languages: [...state.languages, action.language],
-      };
+      return [...state, action.language];
     }
     case "LANGUAGE_REMOVED": {
-      return {
-        ...state,
-        languages: state.languages.filter(
-          (language) => language.id != action.id
-        ),
-      };
+      return state.filter((language) => language.id != action.id);
     }
     default:
       return state;
   }
 };
+
+const count = (state = 0, action) => {
+  switch (action.type) {
+    case "LANGUAGE_LOADED": {
+      return action.languages.length;
+    }
+    case "LANGUAGE_ADDED": {
+      return state + 1;
+    }
+    case "LANGUAGE_REMOVED": {
+      return state - 1;
+    }
+    default:
+      return state;
+  }
+};
+
+const filter = (state = "", action) => {
+  switch (action.type) {
+    case "FILTER_CHANGED": {
+      return action.filter;
+    }
+    default:
+      return state;
+  }
+};
+
+const rootReducer = combineReducers({
+  languages,
+  count,
+  filter,
+});
 
 const store = createStore(rootReducer);
 console.warn("store", store);
