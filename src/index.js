@@ -9,50 +9,8 @@ import {
   legacy_createStore as createStore,
 } from "redux";
 import { Provider } from "react-redux";
-// import { type } from "os";
-
-const languages = (state = [], action) => {
-  // console.warn("rootReducer", state, action);
-  switch (action.type) {
-    case "LANGUAGE_LOADED": {
-      return action.languages;
-    }
-    case "LANGUAGE_ADDED": {
-      return [...state, action.language];
-    }
-    case "LANGUAGE_REMOVED": {
-      return state.filter((language) => language.id !== action.id);
-    }
-    default:
-      return state;
-  }
-};
-
-const count = (state = 0, action) => {
-  switch (action.type) {
-    case "LANGUAGE_LOADED": {
-      return action.languages.length;
-    }
-    case "LANGUAGE_ADDED": {
-      return state + 1;
-    }
-    case "LANGUAGE_REMOVED": {
-      return state - 1;
-    }
-    default:
-      return state;
-  }
-};
-
-const filter = (state = "", action) => {
-  switch (action.type) {
-    case "FILTER_CHANGED": {
-      return action.filter;
-    }
-    default:
-      return state;
-  }
-};
+import { languages } from "./languages/reducer";
+import { filter, count } from "./filter/reducer";
 
 const rootReducer = combineReducers({
   languages,
