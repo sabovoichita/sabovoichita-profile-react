@@ -1,10 +1,12 @@
 import { Component } from "react";
 import "./App.css";
+import "../src/menu/rubik.css";
 import { LanguagesTable } from "./LanguagesTable/LanguagesTable";
 import { connect } from "react-redux";
 import { FilterContainer } from "./filter";
 import { AppFooter } from "./footer/components";
 import AppHeader from "./header";
+import { SideMenu } from "./menu/SideMenu";
 
 class App extends Component {
   constructor(props) {
@@ -39,6 +41,7 @@ class App extends Component {
     return (
       <>
         <AppHeader />
+        <SideMenu />
         <AppFooter />
         <div>
           <FilterContainer />

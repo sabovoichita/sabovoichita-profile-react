@@ -1,0 +1,70 @@
+#rubik-face {
+  background-color: black;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  max-width: fit-content;
+  padding: 4px;
+  grid-gap: 4px;
+}
+/* .rubik-face > div {
+    border: 2px solid #0d0d0d33;
+    padding-top: 100%;
+    background-color: var(--clr-white);
+    border-radius: 0.4rem;
+  } */
+div#rubik-face div {
+  width: 50px;
+  height: 50px;
+}
+
+div#rubik-face div:nth-child(1) {
+  background-color: yellow;
+  border-bottom-right-radius: 5px;
+}
+div#rubik-face div:nth-child(2) {
+  background-color: blue;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+div#rubik-face div:nth-child(3) {
+  background-color: green;
+  border-bottom-left-radius: 5px;
+}
+
+div#rubik-face div:nth-child(4) {
+  background-color: white;
+  border-bottom-right-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+div#rubik-face div:nth-child(5) {
+  background-color: blue;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+}
+
+div#rubik-face div:nth-child(6) {
+  background-color: white;
+  border-bottom-left-radius: 5px;
+  border-top-left-radius: 5px;
+}
+div#rubik-face div:nth-child(7) {
+  background-color: yellow;
+  border-top-right-radius: 5px;
+}
+div#rubik-face div:nth-child(8) {
+  background-color: red;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+}
+div#rubik-face div:nth-child(9) {
+  background-color: green;
+  border-top-left-radius: 5px;
+}
+
+div#rubik-face > tbl > tbody > tr > td[1] {
+  background-color: red;
+}
